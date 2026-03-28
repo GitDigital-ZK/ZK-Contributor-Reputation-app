@@ -1,0 +1,104 @@
+{
+  "$schema": "https://gitdigital-zk.github.io/schemas/governance.schema.json",
+  "app": "ZK-Contributor-Reputation-App",
+  "version": "1.0.0",
+  "ecosystem": "GitDigital-zk",
+  "repository": "GitDigital-ZK/ZK-Contributor-Reputation-app",
+  "description": "Governance configuration for zk-verified contributor reputation, badge issuance, and contributor lifecycle.",
+  "principles": {
+    "public_good": true,
+    "privacy_preserving": true,
+    "open_source": true,
+    "non_extractive": true,
+    "transparent_rules": true
+  },
+  "identity": {
+    "allow_anonymous": true,
+    "allow_pseudonymous": true,
+    "wallet_binding_optional": true,
+    "wallet_networks": [
+      "solana",
+      "evm-compatible"
+    ]
+  },
+  "contribution_types": {
+    "code": {
+      "events": ["pull_request.merged"],
+      "weight": 3
+    },
+    "issues": {
+      "events": ["issues.opened", "issues.closed"],
+      "weight": 1
+    },
+    "reviews": {
+      "events": ["pull_request_review.submitted"],
+      "weight": 2
+    },
+    "governance": {
+      "events": ["discussion.created", "discussion_comment.created"],
+      "weight": 2
+    },
+    "maintenance": {
+      "events": ["workflow_run.completed"],
+      "weight": 2
+    }
+  },
+  "reputation": {
+    "scoring_model": "linear-weighted",
+    "decay": {
+      "enabled": true,
+      "half_life_days": 180
+    },
+    "trust_score": {
+      "min": 0,
+      "max": 100,
+      "default": 10
+    }
+  },
+  "lifecycle": {
+    "stages": [
+      {
+        "id": "seed",
+        "label": "Seed Contributor",
+        "min_reputation": 1
+      },
+      {
+        "id": "core",
+        "label": "Core Contributor",
+        "min_reputation": 25
+      },
+      {
+        "id": "steward",
+        "label": "Steward",
+        "min_reputation": 60
+      },
+      {
+        "id": "guardian",
+        "label": "Guardian",
+        "min_reputation": 85
+      }
+    ]
+  },
+  "governance_roles": {
+    "maintainer": {
+      "can_issue_manual_badges": true,
+      "can_override_scores": false,
+      "can_freeze_reputation": true
+    },
+    "admin": {
+      "can_issue_manual_badges": true,
+      "can_override_scores": true,
+      "can_freeze_reputation": true
+    }
+  },
+  "logging": {
+    "audit_log_enabled": true,
+    "log_events": [
+      "badge_issued",
+      "badge_revoked",
+      "reputation_updated",
+      "identity_bound",
+      "identity_unbound"
+    ]
+  }
+}
