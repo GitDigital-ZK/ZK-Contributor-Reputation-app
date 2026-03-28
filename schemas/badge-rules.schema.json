@@ -1,0 +1,119 @@
+{
+  "$schema": "https://gitdigital-zk.github.io/schemas/badge-rules.schema.json",
+  "app": "ZK-Contributor-Reputation-App",
+  "version": "1.0.0",
+  "repository": "GitDigital-ZK/ZK-Contributor-Reputation-app",
+  "badges": [
+    {
+      "id": "zk-contributor-seed",
+      "name": "ZK-Contributor: Seed",
+      "description": "Awarded for the first zk-verified contribution to the repository.",
+      "tier": "starter",
+      "lifecycle_stage": "seed",
+      "criteria": {
+        "min_reputation": 1,
+        "min_events": 1,
+        "event_types": [
+          "pull_request.merged",
+          "issues.closed"
+        ]
+      },
+      "metadata": {
+        "color": "green",
+        "icon": "🌱",
+        "category": "contribution"
+      },
+      "issuance": {
+        "automatic": true,
+        "revocable": false
+      }
+    },
+    {
+      "id": "zk-contributor-core",
+      "name": "ZK-Contributor: Core",
+      "description": "Awarded for consistent zk-verified contributions and active participation.",
+      "tier": "core",
+      "lifecycle_stage": "core",
+      "criteria": {
+        "min_reputation": 25,
+        "min_events": 5,
+        "event_types": [
+          "pull_request.merged",
+          "pull_request_review.submitted",
+          "issues.closed"
+        ]
+      },
+      "metadata": {
+        "color": "blue",
+        "icon": "🔵",
+        "category": "contribution"
+      },
+      "issuance": {
+        "automatic": true,
+        "revocable": true,
+        "revocation_reasons": [
+          "proven abuse",
+          "governance violation"
+        ]
+      }
+    },
+    {
+      "id": "zk-contributor-steward",
+      "name": "ZK-Contributor: Steward",
+      "description": "Awarded to contributors who help steer the direction and governance of the project.",
+      "tier": "steward",
+      "lifecycle_stage": "steward",
+      "criteria": {
+        "min_reputation": 60,
+        "min_events": 15,
+        "event_types": [
+          "discussion.created",
+          "discussion_comment.created",
+          "pull_request_review.submitted",
+          "workflow_run.completed"
+        ]
+      },
+      "metadata": {
+        "color": "purple",
+        "icon": "🟣",
+        "category": "governance"
+      },
+      "issuance": {
+        "automatic": true,
+        "manual_allowed_roles": [
+          "maintainer",
+          "admin"
+        ],
+        "revocable": true
+      }
+    },
+    {
+      "id": "zk-contributor-guardian",
+      "name": "ZK-Contributor: Guardian",
+      "description": "Awarded to long-term, high-trust contributors with ecosystem-level responsibility.",
+      "tier": "guardian",
+      "lifecycle_stage": "guardian",
+      "criteria": {
+        "min_reputation": 85,
+        "min_events": 30,
+        "event_types": [
+          "security_review.completed",
+          "governance_proposal.authored",
+          "multi_repo_maintenance"
+        ]
+      },
+      "metadata": {
+        "color": "gold",
+        "icon": "🛡️",
+        "category": "stewardship"
+      },
+      "issuance": {
+        "automatic": false,
+        "manual_allowed_roles": [
+          "admin"
+        ],
+        "revocable": true
+      }
+    }
+  ]
+}
